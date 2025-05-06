@@ -1,0 +1,64 @@
+<!-- <div class="container">
+    <div class="row">
+      <div class="col-md-4" *ngFor="let job of jobs">
+        <div class="card" style="width: 18rem;">
+          <img *ngIf="job.imageUrl" [src]="job.imageUrl" alt="{{ job.postProfile }} image">
+          <div class="card-body">
+            <h5 class="card-title">{{ job.postProfile }}</h5>
+            <p class="card-text">{{ job.postDesc }}</p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">{{ job.reqExperience }}</li>
+            <li class="list-group-item">{{ job.postTechStack }}</li>
+          </ul>
+          <div class="card-body">
+            <a  class="card-link">Know More</a>
+            <a  class="card-link">Apply</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+ 
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4" *ngFor="let job of jobs">
+        <div class="card" style="width: 18rem;">
+          <!-- Show image if available, loading spinner if loading, or placeholder if neither -->
+          <div class="card-img-top image-container">
+            <img *ngIf="job.imageName" [src]="job.imageName" alt="{{ job.postProfile }} image">
+            <div *ngIf="loadingImages[job.postId]" class="image-loading">
+              <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+            <div *ngIf="!job.imageName && !loadingImages[job.postId]" class="image-placeholder">
+              No Image Available
+            </div>
+          </div>
+          
+          <div class="card-body">
+            <h5 class="card-title">{{ job.postProfile }}</h5>
+            <p class="card-text">{{ job.postDesc }}</p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">{{ job.reqExperience }}</li>
+            <li class="list-group-item">{{ job.postTechStack }}</li>
+          </ul>
+          <div class="card-body">
+            <a class="card-link">Know More</a>
+            <a class="card-link">Apply</a>
+            <a [routerLink]="'/your-route'" class="text-decoration-none" (click)="deleteJob(job.postId)">
+              <fa-icon [icon]="faTrash"></fa-icon> 
+            </a>    
+
+            <a [routerLink]="['/editjob', job.postId]" class="text-decoration-none">
+              <fa-icon [icon]="faEdit"></fa-icon> 
+            </a> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+

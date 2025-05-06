@@ -1,0 +1,31 @@
+<div class="container">
+    <form [formGroup]="jobForm" (ngSubmit)="submitForm()">
+
+        <label class="form-label">PostId:</label>
+        <input formControlName="postId" type="text" class="form-control"/><br/>
+
+        <label class="form-label">Post Profile:</label>
+        <input formControlName="postProfile" type="text" class="form-control"/><br/>
+      
+        <label class="form-label">Post Description:</label>
+        <textarea formControlName="postDesc" class="form-control"></textarea><br/>
+      
+        <label class="form-label">Required Experience:</label>
+        <input formControlName="reqExperience" type="number" class="form-control" /><br/>
+      
+        <label class="form-label">Tech Stack:</label>
+        <div formArrayName="postTechStack">
+          <div *ngFor="let tech of postTechStack.controls; let i = index">
+            <input [formControlName]="i" class="form-control" />
+            <button type="button" (click)="removeTech(i)">Remove</button>
+          </div>
+          <button type="button" (click)="addTech()">Add Tech</button>
+        </div>
+      
+        <label class="form-label">Upload Image:</label>
+        <input type="file" (change)="onFileSelected($event)" class="form-control"/><br/>
+      
+        <button type="submit">Submit</button>
+      </form>
+      
+</div>
